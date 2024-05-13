@@ -10,6 +10,7 @@ const usericon = <FontAwesomeIcon icon={faUserCircle} />
 export default function Header () {
     return(
     <header>
+    <h1 className="sr-only">Argent Bank</h1>
     <nav className="header__nav">
         <Link to="/">
         <img src={Logo} alt="Logo ArgentBank" className="header__logo"></img>
