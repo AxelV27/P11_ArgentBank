@@ -5,8 +5,8 @@ const checktoken = ( )=>{
   return localStorage.getItem("authenToken") || null; //vérifie si il y a un token
 }
 
-export const autenSlice = createSlice({
-  name: 'counter',
+export const authenSlice = createSlice({
+  name: 'authen',
   initialState: {
     token : checktoken(),
     isAuthenticated : false
@@ -26,12 +26,12 @@ export const autenSlice = createSlice({
       localStorage.removeItem("authenToken");
     },
     loginFail: (state, action) => {
-      state.loginFail= action.payload
+      state.loginFail= action.payload.error
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { loginSuccess, logOut, loginFail } = autenSlice.actions
+export const { loginSuccess, logOut, loginFail } = authenSlice.actions
 
-export default autenSlice.reducer
+export default authenSlice.reducer

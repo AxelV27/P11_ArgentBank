@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
-import counterReducer from './features/authSlice'
+import authenReducer from './features/authSlice'
+import profileReducer from './features/profileSlice'
 
 export default configureStore({
   reducer: {
-    counter: counterReducer
+    authen: authenReducer,
+    profile : profileReducer 
   }
 })
