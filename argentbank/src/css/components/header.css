@@ -10,6 +10,24 @@
     width: 12.5rem;
 }
 
+.header__connecte{
+    display: flex;
+    gap: 5px;
+}
+.header__connecte a{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    color:black ;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.header__connecte a:hover{
+    text-decoration: underline;
+}
+
 .header__deconnecte a{
     display: flex;
     align-items: center;
