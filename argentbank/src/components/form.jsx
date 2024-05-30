@@ -36,7 +36,7 @@ export default function Form (){
                 const responseData = await response.json()
                 const token = responseData.body.token
                 localStorage.setItem('authenToken', token)
-                const response2 = await fetch('http://localhost:3001/api/v1/user/profile', {
+                /*const response2 = await fetch('http://localhost:3001/api/v1/user/profile', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export default function Form (){
                     },
                 });
                 const response2Data = await response2.json()
-                console.log(response2Data)
+                console.log(response2Data.body.firstName)*/
                 navigate('/profile')
                 dispatch(loginSuccess({token}))
             } else{

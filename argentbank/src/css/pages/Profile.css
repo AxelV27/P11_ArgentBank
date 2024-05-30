@@ -49,8 +49,11 @@ input:read-only{
     background-color: #00bc77;
     font-weight: bold;
     padding: 10px;
-    width: 140px;
-    height: 45px;
-    max-width: 100%;
-    border-radius: 5px;
 }
+ h1{
+    margin: 21px 0;
+ }
+
+ .main{
+    padding: 0;
+ }

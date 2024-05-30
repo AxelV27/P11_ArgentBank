@@ -40,7 +40,7 @@ export default function Header () {
             <div className="header__connecte">
                 <Link to="/profile">
                     <i>{usericon}</i>
-                    {userProfile && userProfile.firstName ? userProfile.firstName : 'Loading...'}
+                    {userProfile && userProfile.userName ? userProfile.userName : 'Loading...'}
                     {console.log(userProfile)} 
                 </Link>
                 <Link to='/' onClick={handleLogOut}>

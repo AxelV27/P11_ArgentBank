@@ -49,7 +49,7 @@ export default function Profile (){
                 title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" 
             />
             <Account
-                title="Argent Bank Credit Card (x8349)" amount="$184.30" description="$184.30" 
+                title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance" 
             />
         </main>
     )

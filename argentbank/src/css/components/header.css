@@ -12,16 +12,17 @@
 
 .header__connecte{
     display: flex;
-    gap: 5px;
+    gap: 15px;
 }
 .header__connecte a{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-end;
-    color:black ;
+    color:#2c3e50;
     gap: 10px;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .header__connecte a:hover{
@@ -34,7 +35,7 @@
     font-weight: bold;
     gap: 1rem;
     margin-right: 0.5rem;
-    color: black;
+    color: #2c3e50;
     text-decoration: none;
 }
 

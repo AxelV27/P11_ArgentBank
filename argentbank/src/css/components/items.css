@@ -1,3 +1,4 @@
+
 .feature-item{
     display: flex;
     align-items: center;
@@ -6,6 +7,9 @@
     width: 33%;
     gap: 1.2rem;
     text-align: center;
+    @media (max-width: 920px) {
+        width: 100%;
+    }
 }
 
 .feature-item-icon {
