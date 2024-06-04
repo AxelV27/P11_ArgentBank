@@ -1,0 +1,297 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/login:
+    post:
+      tags:
+        - User Module
+      summary: Login
+      description: API for Login
+      parameters:
+        - in: body
+          name: body
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Login Successfully
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/signup:
+    post:
+      tags:
+        - User Module
+      summary: Signup
+      description: API for Signup
+      parameters:
+        - in: body
+          name: body
+          description: Signup Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Signup Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/profile:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      #produces:
+       # - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for updating a user profile
+      parameters:
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/UserProfile'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+ #Ajout des endpoints         
+  /{user_id}/accounts:
+    get:
+      security:
+        - Bearer : []
+      tags:
+        - Banking Module
+      summary: User Accounts Profile
+      description : API for fetching the accounts of user and basic details
+      parameters: 
+        - $ref: ''
+      produces:
+        - application/json
+    responses :
+      '200' :
+        description : User Accounts retrieved succesully
+        schema:
+          $ref : ''
+      '400' :
+        description : Invalid Fields
+      '500' :
+        description : Internal Server Error
+  /accounts/{accounts_id}/transactions :
+    get:
+       security:
+        - Bearer : [token]
+       tags:
+        - Banking Module
+    summary: User's accounts transaction API
+    description : API for fetching a list of transaction for a specific account
+    parameters :
+      - $ref : ''
+    produces :
+      - application/json
+    responses: 
+      '200':
+        description: Transaction retrieved successully
+        schema:
+          $ref: ''
+      '400' :
+        description : Invalid Fields
+      '500' :
+        description : Internal Server Error
+  /transactions/{transaction_id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Banking Module
+      summary: Transaction edit API
+      description : API for editing notes and categories of transaction
+      parameters:
+        - $ref: ''
+        - in: body
+          name: body
+          description: Transaction change Payload
+          required: true
+          schema:
+            $ref: ''
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details updated successully
+          schema:
+          $ref: ''
+        '400' :
+          description : Invalid Fields
+        '500' :
+          description : Internal Server Error
+  /categories:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Banking Module
+      summary: User's category list of transaction
+      description : API for fetching the transaction category list of user
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transaction categories retrieved successully
+          schema:
+          $ref: ''
+        '400' :
+          description : Invalid Fields
+        '500' :
+          description : Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Banking Module
+      summary: Add a transaction category
+      description : API to add a category name
+      parameters:
+        - $ref: ''
+        - in: body
+          name: body
+          description: Category name Payload
+          required: true
+          schema:
+            $ref: ''
+      responses:
+        '200':
+          description: User transaction categories updated successully
+          schema:
+          $ref: ''
+        '400' :
+          description : Invalid Fields
+        '500' :
+          description : Internal Server Error
+  /categories/{category_id}: 
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Banking Module
+      summary: Update a transaction caotegoriy string
+      description : API to update a specific category name
+      parameters:
+        - $ref: ''
+        - in: body
+          name: body
+          description: category id and name Payload
+          required: true
+          schema:
+            $ref: ''
+      responses:
+        '200':
+          description: User transaction categories name updated successully
+          schema:
+          $ref: ''
+        '400' :
+          description : Invalid Fields
+        '500' :
+          description : Internal Server Error      
+# Fin de l'ajout
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      firstName:
+        type: string
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+      userName:
+        type: string
+        description: user public name
+  Login:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      userName:
+        type: string
