@@ -5,7 +5,7 @@ import { loginSuccess, logOut } from "../redux/features/authSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../assets/images/argentBankLogo.png"
+import Logo from "../assets/images/argentBankLogo.webp"
 import '../css/components/header.css'
 
 const usericon = <FontAwesomeIcon icon={faUserCircle} />
