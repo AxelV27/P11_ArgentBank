@@ -166,7 +166,7 @@ paths:
         '200':
           description: infos transaction  updated successully
           schema:
-            $ref: '#definition/UserCategoriesResponse'
+            $ref: '#definitions/UserCategoriesResponse'
         '400':
           description: Invalid Fields
         '500':
