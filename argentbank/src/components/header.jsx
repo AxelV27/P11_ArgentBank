@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
-import { loginSuccess, logOut } from "../redux/features/authSlice";
+import { loginSuccess, logOut, checktoken } from "../redux/features/authSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
@@ -22,11 +22,11 @@ export default function Header () {
     };
     // Verifie la présence du token 
     useEffect(()=>{
-        const token = localStorage.getItem('authenToken')
+        const token = checktoken
         if(token){
             dispatch(loginSuccess({token})); // Recupère le token
         }
-    }, []);
+    }, [dispatch]);
 
     return(
     <header>

@@ -15,7 +15,7 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" />:<Login />} />
       <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login"/>}  />
     </Routes>
     <Footer />

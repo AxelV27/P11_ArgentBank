@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
-const checktoken = ( )=>{
+ export const checktoken = ( )=>{
   return localStorage.getItem("authenToken") || null; //vérifie si il y a un token
 }
 

@@ -9,7 +9,7 @@ import { loginSuccess } from "../redux/features/authSlice";
 
 const userIcon = <FontAwesomeIcon icon={faUserCircle} />
 
-export default function Form (){
+export default  function Form (){
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,7 +23,6 @@ export default function Form (){
             email : email,
             password: password,
         };
-
         try{
             const response = await fetch('http://localhost:3001/api/v1/user/login', {
                 method: "POST",
