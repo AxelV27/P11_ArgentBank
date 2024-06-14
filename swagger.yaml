@@ -102,51 +102,32 @@ paths:
         '500':
           description: Internal Server Error
  #Ajout des endpoints         
-  /accounts/{accounts_id}/transactions:
+  /accounts/{accounts_id}:
     get:
       security:
         - Bearer: []
       tags:
         - Banking Module
       summary: User's accounts transaction API
-      description: API for fetching a list of transaction for a specific account
+      description: API for fetching a list of a specific account
       parameters:
-         $ref: '#/parameters/AccountIDParam'
+         - in: path
+           name: id
+           type: integer
+           required: true 
+           description: accounts_id
       produces:
         - application/json
       responses: 
         '200':
           description: Transaction retrieved successully
           schema:
-            $ref: '#definitions/TransactionResponse'
+            $ref: '#definitions/Account'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions/{transaction_id}/infos:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Banking Module
-      summary: Add info for a specific transaction
-      description: API to add info
-      parameters:
-      - in: body
-        name: body
-        description: infos transaction Payload
-        required: true
-        schema:
-          $ref: '#/definitions/infosValues'
-      responses: 
-        '200':
-          description: info transaction  updated successully
-          schema:
-            $ref: '#/definitions/UserCategoriesResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
+  /{accounts_id}/transactions/{transaction_id}/infos:
     put:
       security:
         - Bearer: []
@@ -155,54 +136,41 @@ paths:
       summary: update info transaction string
       description: API to update info
       parameters:
-         #$ref: '#/parameters/TransactionIDParam'
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: transaction_id
         - in: body
           name: body
-          description: info name payload
+          description: Update transaction attributes
           required: true
           schema:
-            $ref: '#definitions/infosValues'
+            $ref: '#definitions/TransactionDetailUpdate'
       responses:
         '200':
           description: infos transaction  updated successully
           schema:
-            $ref: '#definitions/UserCategoriesResponse'
+            $ref: '#definitions/Transaction'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-    delete: 
-      security:
-        - Bearer: []
-      tags:
-        - Banking Modules
-      summary: Delate transaction infos
-      description: API to delete transaction infos note and categories
-      parameters: 
-         $ref: '#parameters/TransactionIDParam'
-      responses:
-        '200':
-          description: infos transaction  updated successully
-          schema:
-            $ref: '#definitions/UserCategoriesResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /transactions/{transaction_id}:
+  /{accounts_id}/transactions/{transaction_id}:
     get:
       security:
         - Bearer: []
       tags:
         - Banking Module
       summary: Transaction edit API
-      description: API for editing notes and categories of transaction
+      description: API for editing note and categories of transaction
       parameters:
         #$ref: '#/parameters/TransactionIDParam'
-        - in: body
-          name: body
-          description: Transaction change Payload
+        - in: path
+          name: id
+          type: integer
           required: true
+          description: transaction_id
           schema:
             $ref: '#/definitions/TransactionDetailUpdate'
       produces:
@@ -314,6 +282,46 @@ definitions:
               type: string
             group:
               type: string
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      currency:
+        type: string
+      type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+  TransactionList:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        type:
+          type: string
+        category:
+          type: string
+        note:
+          type: string
   TransactionResponse:
     type: object
     properties:
@@ -348,59 +356,27 @@ definitions:
       - status
       - message
       - body
-  Transaction:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Transaction ID
-      account-id:
-        type: string
-        description: transaction specific account ID
-      date:
-        type: object
-        properties:
-          orderDate:
-            type: string
-            format: date-time
-          validationDate:
-            type: string
-            format: date-time
-            description: Transaction date and time
-      description:
-        type: string
-        description: short transaction description or title
-        amount:
-          $ref: '#/definitions/TransactionAndCurrency'
-      creditDebitIndicator:
-        type: string
-        enum:
-          - Credit
-          - Debit
-        description:
-          Indicates wheter the balance is a credit or a debit balance
-      type:
-        type: string
-      note:
-        type: string
-      transactionRelatedBalance:
-        type: object
-        description: balance of the transaction-specific account
-        properties:
-          oldBalance:
-            $ref: '#/definitions/Balance'
-          newBalance:
-            $ref: '#definitions/Balance'
-  AccountId:
-    description: A unique and immutable identifier used to identify the account resource
-    type: string
-    minLenght: 1
-    maxLenght: 40
+  Account:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Account ID
+        name:
+          type: string
+          description: Account name
+        balance:
+          type: number
+          description: Account balance
+        currency:
+          type: string
   Balance:
     type: object
     properties:
       account-id:
-        $ref: '#/definitions/AccountID'
+        $ref: '#/definitions/Account'
       amount:
         $ref: '#definitions/AmountAndCurrency'
       dateTime:
@@ -434,6 +410,6 @@ definitions:
       note:
         type: string
       category:
-        type: integer
+        type: string
 
       
