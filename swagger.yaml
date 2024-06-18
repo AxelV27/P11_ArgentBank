@@ -122,7 +122,7 @@ paths:
         '200':
           description: Transaction retrieved successully
           schema:
-            $ref: '#definitions/Transaction'
+            $ref: '#definitions/TransactionList'
         '400':
           description: Invalid Fields
         '500':
